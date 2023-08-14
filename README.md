@@ -20,8 +20,8 @@ git clone https://github.com/konzepts/qbdl-gui.git
 2. Virtual Environment: Consider using a virtual environment to isolate the dependencies for your project. This can help avoid conflicts between different versions of libraries. You can create a virtual environment using:
 
 ```
-python3 -m venv myenv
-source myenv/bin/activate
+python3 -m venv qbdl
+source qbdl/bin/activate
 ```
 
 3. Install the dependencies:
