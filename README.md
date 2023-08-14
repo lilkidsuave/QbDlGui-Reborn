@@ -11,10 +11,13 @@ qbdl-gui is a gui for qobuz-dl a tool used for downloading music from Qobuz.
 
 ## Installation
 
-1. Clone the repository:
+1. Clone the repository and cd into:
 
 ```
 git clone https://github.com/konzepts/qbdl-gui.git
+```
+```
+cd qbdl-gui
 ```
 
 2. Virtual Environment: Consider using a virtual environment to isolate the dependencies for your project. This can help avoid conflicts between different versions of libraries. You can create a virtual environment using:
