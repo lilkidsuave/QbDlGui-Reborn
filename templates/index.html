@@ -1,58 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>QoBuz DL GUI</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #121212;
-            color: #ffffff;
-            text-align: center;
-        }
-        .container {
-            width: 300px;
-            margin: auto;
-            padding-top: 50px;
-        }
-        input, select {
-            width: 100%;
-            padding: 10px;
-            margin: 5px 0;
-            display: inline-block;
-            border: 1px solid #ccc;
-            box-sizing: border-box;
-        }
-        input[type="submit"] {
-            background-color: #2467c6;
-            color: white;
-            border: none;
-        }
-        input[type="submit"]:hover {
-            opacity: 0.8;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qobuz Downloader</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>qobuz-dl Web GUI</h1>
     <div class="container">
+        <h1>Qobuz Downloader</h1>
         <form action="/" method="post">
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required><br><br>
+            <input type="email" id="email" name="email" value="{{ email }}" required>
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required><br><br>
+            <input type="password" id="password" name="password" value="{{ password }}" required>
             <label for="url">Enter URL:</label>
-            <input type="text" id="url" name="url" required><br><br>
+            <input type="text" id="url" name="url" required>
             <label for="download_location">Download Location:</label>
-            <input type="text" id="download_location" name="download_location" required><br><br>
-            <label for="quality">Select Quality:</label>
-            <select id="quality" name="quality">
-                <option value="5">5 - MP3</option>
-                <option value="6">6 - 16 bit, 44.1kHz</option>
-                <option value="7">7 - 24 bit, <96kHz</option>
-                <option value="27">27 - 24 bit, >96kHz</option>
-            </select><br><br>
+            <input type="text" id="download_location" name="download_location" value="{{ download_location }}" required>
+            <label for="quality">Download Quality:</label>
+            <select id="quality" name="quality" required>
+                <option value="5">MP3 - 320 kbps</option>
+                <option value="6">FLAC - 16 bit, 44.1kHz</option>
+                <option value="7">FLAC - 24 bit, <96kHz</option>
+                <option value="27">FLAC - 24 bit, >96kHz</option>
+            </select
+            <!-- Other fields... -->
+            <label for="remember">Remember me:</label>
+            <input type="checkbox" id="remember" name="remember" value="yes">
             <input type="submit" value="Download">
         </form>
+        <div class="footer">
+            <p>Qobuz Downloader &copy; 2023</p>
+        </div>
     </div>
 </body>
 </html>
