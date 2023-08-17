@@ -1,8 +1,18 @@
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f9f9f9;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 20px;
+    transition: background-color 0.5s;
+}
+
+[data-theme="light"] {
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+[data-theme="dark"] {
+    background-color: #2c2f33;
+    color: #f4f4f4;
 }
 
 .container {
@@ -10,104 +20,83 @@ body {
     margin: 0 auto;
     background: #fff;
     padding: 30px;
-    border: 1px solid #e0e0e0;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.5s;
 }
 
-h1 {
-    color: #333;
-    font-weight: normal;
+[data-theme="dark"] .container {
+    background-color: #36393f;
+}
+
+h2 {
+    text-align: center;
+    color: #007BFF;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    margin-bottom: 20px;
 }
 
 label {
     display: block;
     margin-bottom: 8px;
     font-weight: bold;
-    color: #666;
 }
 
 input[type="text"],
 input[type="email"],
-input[type="password"] {
+input[type="password"],
+input[type="number"] {
     width: 100%;
     padding: 10px;
-    margin-bottom: 20px;
     border: 1px solid #ccc;
-    font-size: 14px;
+    border-radius: 4px;
+    transition: border-color 0.5s;
+}
+
+[data-theme="dark"] input[type="text"],
+[data-theme="dark"] input[type="email"],
+[data-theme="dark"] input[type="password"],
+[data-theme="dark"] input[type="number"] {
+    background-color: #2c2f33;
+    color: #f4f4f4;
+    border-color: #4a4d52;
 }
 
 input[type="submit"] {
-    background: #0077cc;
+    display: block;
+    width: 100%;
+    background: #007BFF;
     color: #fff;
     padding: 10px 20px;
     border: none;
+    border-radius: 4px;
     cursor: pointer;
-    font-size: 14px;
+    transition: background-color 0.5s;
 }
 
 input[type="submit"]:hover {
-    background: #005fa3;
+    background: #0056b3;
 }
 
-select {
-    width: 100%;
-    padding: 10px;
+.progress {
+    height: 20px;
+    background: #ccc;
+    border-radius: 4px;
     margin-bottom: 20px;
-    border: 1px solid #ccc;
-    font-size: 14px;
 }
 
-input[type="checkbox"] {
-    margin-right: 10px;
+.progress-bar {
+    height: 100%;
+    width: 0;
+    background: #007BFF;
+    border-radius: 4px;
+    transition: width 0.5s;
 }
 
-.footer {
-    text-align: center;
-    margin-top: 30px;
-    color: #888;
-    font-size: 12px;
-}
-/* ... Existing CSS for light mode ... */
-
-/* Dark Mode */
-@media (prefers-color-scheme: dark) {
-    body {
-        background-color: #121212;
-        color: #e0e0e0;
-    }
-
-    .container {
-        background: #1f1f1f;
-        border-color: #333;
-    }
-
-    h1 {
-        color: #f0f0f0;
-    }
-
-    label {
-        color: #b0b0b0;
-    }
-
-    input[type="text"],
-    input[type="email"],
-    input[type="password"],
-    select {
-        background: #2a2a2a;
-        color: #e0e0e0;
-        border-color: #444;
-    }
-
-    input[type="submit"] {
-        background: #0077cc;
-        color: #fff;
-    }
-
-    input[type="submit"]:hover {
-        background: #005fa3;
-    }
-
-    .footer {
-        color: #888;
-    }
+.status {
+    margin-bottom: 20px;
+    font-style: italic;
 }
