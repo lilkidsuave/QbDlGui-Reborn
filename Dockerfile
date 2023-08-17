@@ -21,4 +21,4 @@ RUN adduser -u 5678 --disabled-password --gecos "" dler && chown -R dler /app
 USER dler
 
 # During debugging, this entry point will be overridden.
-CMD ["python", "app.py"]
+CMD ["python", "qbdl_gui.py"]
