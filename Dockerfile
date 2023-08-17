@@ -16,9 +16,5 @@ RUN python -m pip install -r requirements.txt
 WORKDIR /app
 COPY . /app
 
-# Creates a non-root user with an explicit UID and adds permission to access the /app folder
-RUN adduser -u 5678 --disabled-password --gecos "" dler && chown -R dler /app
-USER dler
-
 # During debugging, this entry point will be overridden.
 CMD ["python", "qbdl_gui.py"]
