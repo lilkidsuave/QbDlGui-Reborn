@@ -1,58 +1,92 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>QoBuz DL GUI</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #121212;
-            color: #ffffff;
-            text-align: center;
-        }
-        .container {
-            width: 300px;
-            margin: auto;
-            padding-top: 50px;
-        }
-        input, select {
-            width: 100%;
-            padding: 10px;
-            margin: 5px 0;
-            display: inline-block;
-            border: 1px solid #ccc;
-            box-sizing: border-box;
-        }
-        input[type="submit"] {
-            background-color: #2467c6;
-            color: white;
-            border: none;
-        }
-        input[type="submit"]:hover {
-            opacity: 0.8;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QoBuzDL GUI</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
-    <h1>qobuz-dl Web GUI</h1>
-    <div class="container">
-        <form action="/" method="post">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required><br><br>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required><br><br>
-            <label for="url">Enter URL:</label>
-            <input type="text" id="url" name="url" required><br><br>
-            <label for="download_location">Download Location:</label>
-            <input type="text" id="download_location" name="download_location" required><br><br>
-            <label for="quality">Select Quality:</label>
-            <select id="quality" name="quality">
-                <option value="5">5 - MP3</option>
-                <option value="6">6 - 16 bit, 44.1kHz</option>
-                <option value="7">7 - 24 bit, <96kHz</option>
-                <option value="27">27 - 24 bit, >96kHz</option>
-            </select><br><br>
-            <input type="submit" value="Download">
+    <div class="container mt-5">
+        <h2 class="mb-4">QobuzDL GUI</h2>
+        <form action="/" method="post" id="downloadForm">
+            <div class="form-group">
+                <label for="email">Your QoBuz Email:</label>
+                <input type="email" class="form-control" name="email" id="email" value="{{ email }}" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Your QoBuz Password:</label>
+                <input type="password" class="form-control" name="password" id="password" required>
+            </div>
+            <div class="form-group">
+                <label for="url">QoBuz Link:</label>
+                <input type="text" class="form-control" name="url" id="url" required>
+            </div>
+            <div class="form-group">
+                <label for="download_location">Download Location:</label>
+                <input type="text" class="form-control" name="download_location" id="download_location" value="{{ download_location }}" required>
+            </div>
+            <div class="form-group">
+                <label for="quality">Quality:</label>
+                <select class="form-control" name="quality" id="quality" required>
+                    <option value="5">MP3 - 320 kbps</option>
+                    <option value="6">CD Quality FLAC - 16 bit, 44.1kHz</option>
+                    <option value="7">Hi-Res Audio FLAC - 24 bit, up to 96kHz</option>
+                    <option value="27">Hi-Res Audio FLAC - 24 bit, up to 192kHz</option>
+                </select>
+            </div>
+            <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" name="rememberMe" id="rememberMe">
+                <label class="form-check-label" for="rememberMe">Remember me and settings</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Download</button>
         </form>
-    </div>
+        <div id="progress-container" style="display: none;">
+            <h4>Downloading...</h4>
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: 0%;" id="progress-bar"></div>
+            </div>
+            <p id="status-text">Starting download...</p>
+        </div>
+        
+        <script>
+            $('#downloadForm').submit(function(e) {
+                e.preventDefault();
+                $('#progress-container').show();
+        
+                $.ajax({
+                    type: 'POST',
+                    url: '/',
+                    data: $(this).serialize(),
+                    success: function(data) {
+                        if (data.status === 'completed') {
+                            $('#progress-bar').css('width', '100%');
+                            $('#status-text').text('Download Completed!');
+                        }
+                    },
+                    xhr: function() {
+                        var xhr = new window.XMLHttpRequest();
+                        xhr.upload.addEventListener("progress", function(evt) {
+                            if (evt.lengthComputable) {
+                                var percentComplete = evt.loaded / evt.total;
+                                percentComplete = parseInt(percentComplete * 100);
+                                $('#progress-bar').css('width', percentComplete + '%');
+                            }
+                        }, false);
+                        return xhr;
+                    }
+                });
+            });
+        </script>
+        <div class="footer">
+            <p>QoBuz DL GUI &copy; Gyarbij 2023</p>
+        </div>
+    </div>   
 </body>
+
 </html>

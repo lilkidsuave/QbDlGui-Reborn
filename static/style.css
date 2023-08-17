@@ -1,0 +1,102 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 20px;
+    transition: background-color 0.5s;
+}
+
+[data-theme="light"] {
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+[data-theme="dark"] {
+    background-color: #2c2f33;
+    color: #f4f4f4;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.5s;
+}
+
+[data-theme="dark"] .container {
+    background-color: #36393f;
+}
+
+h2 {
+    text-align: center;
+    color: #007BFF;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border-color 0.5s;
+}
+
+[data-theme="dark"] input[type="text"],
+[data-theme="dark"] input[type="email"],
+[data-theme="dark"] input[type="password"],
+[data-theme="dark"] input[type="number"] {
+    background-color: #2c2f33;
+    color: #f4f4f4;
+    border-color: #4a4d52;
+}
+
+input[type="submit"] {
+    display: block;
+    width: 100%;
+    background: #007BFF;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.5s;
+}
+
+input[type="submit"]:hover {
+    background: #0056b3;
+}
+
+.progress {
+    height: 20px;
+    background: #ccc;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0;
+    background: #007BFF;
+    border-radius: 4px;
+    transition: width 0.5s;
+}
+
+.status {
+    margin-bottom: 20px;
+    font-style: italic;
+}
