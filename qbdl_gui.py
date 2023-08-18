@@ -17,13 +17,17 @@ def index():
         quality = int(request.form['quality'])
         remember = request.form.get('rememberMe')
 
-        qobuz = QobuzDL(
-            directory=download_location,
-            quality=quality
-        )
-        qobuz.get_tokens()
-        qobuz.initialize_client(email, password, qobuz.app_id, qobuz.secrets)
-        qobuz.handle_url(url)
+        try:
+            qobuz = QobuzDL(
+                directory=download_location,
+                quality=quality
+            )
+            qobuz.get_tokens()
+            qobuz.initialize_client(email, password, qobuz.app_id, qobuz.secrets)
+            qobuz.handle_url(url)
+        except Exception as e:
+            logging.error("An error occurred: " + str(e))
+            return jsonify(status='error', message=str(e)), 500
 
         if remember == 'on':
             session['email'] = email
@@ -33,7 +37,6 @@ def index():
 
         return jsonify(status='completed')
 
-    # If the user has a session, pre-fill the form with their settings
     email = session.get('email', '')
     download_location = session.get('download_location', '')
     quality = session.get('quality', 7)
