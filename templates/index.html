@@ -55,33 +55,36 @@
         </div>
         
         <script>
-            $('#downloadForm').submit(function(e) {
-                e.preventDefault();
-                $('#progress-container').show();
+        $('#downloadForm').submit(function(e) {
+            e.preventDefault();
+            $('#progress-container').show();
         
-                $.ajax({
-                    type: 'POST',
-                    url: '/',
-                    data: $(this).serialize(),
-                    success: function(data) {
-                        if (data.status === 'completed') {
-                            $('#progress-bar').css('width', '100%');
-                            $('#status-text').text('Download Completed!');
-                        }
-                    },
-                    xhr: function() {
-                        var xhr = new window.XMLHttpRequest();
-                        xhr.upload.addEventListener("progress", function(evt) {
-                            if (evt.lengthComputable) {
-                                var percentComplete = evt.loaded / evt.total;
-                                percentComplete = parseInt(percentComplete * 100);
-                                $('#progress-bar').css('width', percentComplete + '%');
-                            }
-                        }, false);
-                        return xhr;
+            $.ajax({
+                type: 'POST',
+                url: '/',
+                data: $(this).serialize(),
+                success: function(data) {
+                    if (data.status === 'completed') {
+                        $('#progress-bar').css('width', '100%');
+                        $('#status-text').text('Download Completed!');
                     }
-                });
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    $('#status-text').text('An error occurred: ' + jqXHR.responseJSON.message);
+                },
+                xhr: function() {
+                    var xhr = new window.XMLHttpRequest();
+                    xhr.upload.addEventListener("progress", function(evt) {
+                        if (evt.lengthComputable) {
+                            var percentComplete = evt.loaded / evt.total;
+                            percentComplete = parseInt(percentComplete * 100);
+                            $('#progress-bar').css('width', percentComplete + '%');
+                        }
+                    }, false);
+                    return xhr;
+                }
             });
+        });
         </script>
         <div class="footer">
             <p>QoBuz DL GUI &copy; Gyarbij 2023</p>
