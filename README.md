@@ -1,6 +1,6 @@
 # qbdl-gui
 
-qbdl-gui is a gui for qobuz-dl a tool used for downloading music from Qobuz.
+qbdl-gui is a gui for qobuz-dl by @vitiko98.
 
 ## Features
 
