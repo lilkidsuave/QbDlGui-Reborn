@@ -6,3 +6,4 @@ pick==2.2.0
 beautifulsoup4
 colorama
 Flask>=2.3.2
+cryptography
