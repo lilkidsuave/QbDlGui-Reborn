@@ -2,7 +2,7 @@
 FROM python:3.12-alpine
 
 # Install gcc and other necessary build tools
-RUN apk add --no-cache gcc musl-dev
+RUN apk add --no-cache gcc musl-dev libffi-dev
 
 EXPOSE 5000
 
