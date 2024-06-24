@@ -23,7 +23,7 @@ h2 {
     margin-bottom: 20px;
 }
 
-.input-group {
+.input-group, .form-group {
     margin-bottom: 20px;
 }
 
@@ -36,7 +36,8 @@ label {
 input[type="text"],
 input[type="email"],
 input[type="password"],
-input[type="number"] {
+input[type="number"],
+select.form-control {
     width: 100%;
     padding: 10px;
     border: 1px solid #4a4d52;
