@@ -38,10 +38,6 @@ input[type="email"],
 input[type="password"],
 input[type="number"],
 select.form-control {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #4a4d52;
-    border-radius: 4px;
     background-color: #2c2f33;
     color: #f4f4f4;
     transition: border-color 0.5s;
