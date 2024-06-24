@@ -1,6 +1,9 @@
 # Base
 FROM python:3.12-alpine
 
+# Install gcc and other necessary build tools
+RUN apk add --no-cache gcc musl-dev
+
 EXPOSE 5000
 
 # Keeps Python from generating .pyc files in the container
