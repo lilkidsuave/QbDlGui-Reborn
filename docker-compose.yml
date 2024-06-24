@@ -2,9 +2,6 @@ version: '3.4'
 
 services:
   qbdlgui:
-    image: qbdlgui
-    build:
-      context: .
-      dockerfile: ./Dockerfile
+    image: ghcr.io/lilkidsuave/qbdl-gui:latest
     ports:
       - 5000:5000
