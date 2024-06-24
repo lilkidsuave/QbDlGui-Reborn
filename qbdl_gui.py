@@ -7,11 +7,10 @@ from qobuz_dl import QobuzDL
 logging.basicConfig(level=logging.INFO)
 
 app = Flask(__name__)
-app.secret_key = os.environ.get('SECRET_KEY', 'your_default_secret_key')
 
-encryption_key = os.environ.get('ENCRYPTION_KEY')
-if not encryption_key:
-    raise ValueError("No ENCRYPTION_KEY set for Flask application")
+# Auto-generate a secret key and an encryption key
+app.secret_key = os.environ.get('SECRET_KEY') or os.urandom(24)
+encryption_key = os.environ.get('ENCRYPTION_KEY') or Fernet.generate_key()
 fernet = Fernet(encryption_key)
 
 def encrypt_password(password):
