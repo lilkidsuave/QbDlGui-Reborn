@@ -53,7 +53,7 @@
             </div>
             <p id="status-text">Starting download...</p>
         </div>
-        
+
         <script>
         $('#downloadForm').submit(function(e) {
             e.preventDefault();
@@ -67,6 +67,14 @@
                     if (data.status === 'completed') {
                         $('#progress-bar').css('width', '100%');
                         $('#status-text').text('Download Completed!');
+
+                        // Hide progress container and reset form after 1 second
+                        setTimeout(function() {
+                            $('#progress-container').hide();
+                            $('#downloadForm')[0].reset();
+                            $('#progress-bar').css('width', '0%');
+                            $('#status-text').text('Starting download...');
+                        }, 1000);
                     }
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
