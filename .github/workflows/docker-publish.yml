@@ -32,8 +32,8 @@ jobs:
           context: .
           push: true
           tags: |
-            ghcr.io/lilkidsuave/cosmos-cert-extractor:latest
-            ghcr.io/lilkidsuave/cosmos-cert-extractor:V1.0.0
+            ghcr.io/lilkidsuave/qbdl-gui:latest
+            ghcr.io/lilkidsuave/qbdl-gui:V1.0.0
           platforms: linux/amd64,linux/arm64
 
       - name: Log out from GitHub Container Registry
