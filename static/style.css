@@ -36,7 +36,7 @@ input[type="email"],
 input[type="password"],
 input[type="number"],
 select.form-control {
-    border-color: #4a4d52;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.25);
 }
 
 input[type="submit"] {
