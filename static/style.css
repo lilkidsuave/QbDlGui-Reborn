@@ -37,7 +37,7 @@ input[type="text"],
 input[type="email"],
 input[type="password"],
 input[type="number"],
-.form-control {
+select.form-control {
     box-shadow: 0 0 10px rgba(0, 123, 255, 0.25);
 }
 
