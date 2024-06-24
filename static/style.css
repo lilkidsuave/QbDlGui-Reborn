@@ -4,7 +4,7 @@ body {
     padding: 20px;
     transition: background-color 0.5s;
     background-color: #2c2f33;
-    color: #303337;
+    color: #B6BFCC;
 }
 
 .container {
@@ -37,7 +37,7 @@ input[type="text"],
 input[type="email"],
 input[type="password"],
 input[type="number"],
-select.form-control {
+.form-control {
     box-shadow: 0 0 10px rgba(0, 123, 255, 0.25);
 }
 
