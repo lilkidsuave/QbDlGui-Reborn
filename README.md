@@ -15,7 +15,11 @@ qbdl-gui is a gui for qobuz-dl by @vitiko98 and @lilkidsuave
 
 Before using the docker compose, make sure to edit your /downloads bind.
 Same goes for the docker command below.
-```docker run -d --name qbdlgui -p 5000:5000 -v Directory:/downloads ghcr.io/lilkidsuave/qbdl-gui:latest```
+
+```
+docker run -d --name qbdlgui -p 5000:5000 -v Directory:/downloads ghcr.io/lilkidsuave/qbdl-gui:latest
+```
+
 Access the web gui via localhost:5000
 
 ### Host Install 
@@ -71,4 +75,3 @@ localhost:5000
 ## Contributing
 
 Please refer to the existing guidelines for contributing to this project.
-
