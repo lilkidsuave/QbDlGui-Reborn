@@ -40,6 +40,7 @@ input[type="number"],
 select.form-control {
     background-color: #2c2f33;
     color: #f4f4f4;
+    border-color: #4a4d52
     transition: border-color 0.5s;
 }
 
