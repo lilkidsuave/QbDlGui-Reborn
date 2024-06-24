@@ -4,7 +4,7 @@ body {
     padding: 20px;
     transition: background-color 0.5s;
     background-color: #2c2f33;
-    color: #f4f4f4;
+    color: #B6BFCC;
 }
 
 .container {
@@ -39,6 +39,8 @@ input[type="password"],
 input[type="number"],
 select.form-control {
     box-shadow: 0 0 10px rgba(0, 123, 255, 0.25);
+    background-color: #2c2f33;
+    color: #f4f4f4;
 }
 
 input[type="submit"] {
