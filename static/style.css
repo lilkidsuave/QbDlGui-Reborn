@@ -2,9 +2,8 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 20px;
-    transition: background-color 0.5s;
     background-color: #2c2f33;
-    color: #f4f4f4;
+    color: #2c2f33;
 }
 
 .container {
@@ -14,7 +13,6 @@ body {
     padding: 30px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 123, 255, 0.25);
-    transition: background-color 0.5s;
 }
 
 h2 {
@@ -38,11 +36,7 @@ input[type="email"],
 input[type="password"],
 input[type="number"],
 select.form-control {
-    background-color: #2c2f33;
-    color: #f4f4f4;
     border-color: #4a4d52;
-    transition-color: #3b3e43;
-    transition: transition-color 0.5s;
 }
 
 input[type="submit"] {
@@ -54,7 +48,6 @@ input[type="submit"] {
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.5s;
 }
 
 input[type="submit"]:hover {
