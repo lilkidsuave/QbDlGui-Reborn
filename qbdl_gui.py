@@ -38,10 +38,11 @@ def index():
         return jsonify(status='completed')
 
     email = session.get('email', '')
+    password = session.get('password', '')
     download_location = session.get('download_location', '')
     quality = session.get('quality', 7)
 
-    return render_template('index.html', email=email, download_location=download_location, quality=quality)
+    return render_template('index.html', email=email, password=password, download_location=download_location, quality=quality)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
