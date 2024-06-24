@@ -1,5 +1,5 @@
 # Base
-FROM python:3.12-rc-slim
+FROM python:3.12-alpine
 
 EXPOSE 5000
 
