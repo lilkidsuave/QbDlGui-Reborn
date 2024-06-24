@@ -41,12 +41,6 @@ select.form-control {
     box-shadow: 0 0 10px rgba(0, 123, 255, 0.25);
 }
 
-.select-quality {
-    background-color: #2c2f33;
-    color: #B6BFCC;
-    cursor: pointer;
-}
-
 input[type="submit"] {
     display: block;
     width: 100%;
