@@ -5,3 +5,5 @@ services:
     image: ghcr.io/lilkidsuave/qbdl-gui:latest
     ports:
       - 5000:5000
+    volumes:
+      - Directory:/downloads
