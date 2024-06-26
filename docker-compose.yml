@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   qbdlgui:
-    image: ghcr.io/lilkidsuave/qbdl-gui:latest
+    image: ghcr.io/lilkidsuave/qbdlgui-reborn:latest
     ports:
       - 5000:5000
     volumes:
