@@ -19,7 +19,7 @@ Before using the docker compose, make sure to edit your /downloads bind.
 Same goes for the docker command below.
 
 ```
-docker run -d --name qbdlgui -p 5000:5000 -v Directory:/downloads ghcr.io/lilkidsuave/qbdl-gui:latest
+docker run -d --name qbdlgui -p 5000:5000 -v Directory:/downloads ghcr.io/lilkidsuave/qbdlgui-reborn:latest
 ```
 
 Access the web gui via localhost:5000
