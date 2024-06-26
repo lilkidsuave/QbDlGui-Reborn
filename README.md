@@ -2,6 +2,8 @@
 
 QbDlGui-Reborn is a gui for qobuz-dl by @vitiko98 and @lilkidsuave
 
+![alt text](https://github.com/lilkidsuave/QbDlGui-Reborn/blob/main/Images/Screenshot2.png)
+
 ## Features
 
 - Download albums, tracks, artists, and playlists from Qobuz.
