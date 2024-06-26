@@ -1,6 +1,6 @@
-# qbdl-gui
+# QbDlGui-Reborn
 
-qbdl-gui is a gui for qobuz-dl by @vitiko98 and @lilkidsuave
+QbDlGui-Reborn is a gui for qobuz-dl by @vitiko98 and @lilkidsuave
 
 ## Features
 
@@ -8,6 +8,8 @@ qbdl-gui is a gui for qobuz-dl by @vitiko98 and @lilkidsuave
 - Supports various quality levels.
 - Embed album art into files.
 - Web GUI for easy interaction.
+- Easy to setup via Docker Compose.
+- Runs on Flask via Gunicorn with Gevent.
 
 ## Installation
 
@@ -22,7 +24,7 @@ docker run -d --name qbdlgui -p 5000:5000 -v Directory:/downloads ghcr.io/lilkid
 
 Access the web gui via localhost:5000
 
-### Host Install 
+### Host Install
 
 1. Clone the repository and cd into:
 
@@ -58,7 +60,7 @@ To use the web GUI, follow these steps:
 
 1. Run the web GUI script:
 ```
-python3 qbdl_gui.py
+gunicorn -b 0.0.0.0:5000 --worker-class=gevent --workers=4 qbdl_gui:app
 ```
 2. Open a web browser and navigate to:
 
