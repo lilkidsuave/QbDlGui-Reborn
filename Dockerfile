@@ -1,4 +1,4 @@
-# Base
+# Base image
 FROM python:3.12-alpine
 
 # Install gcc and other necessary build tools
@@ -16,8 +16,9 @@ ENV PYTHONUNBUFFERED=1
 COPY requirements.txt .
 RUN python -m pip install -r requirements.txt
 
+# Set up working directory
 WORKDIR /app
 COPY . /app
 
-# Use Gunicorn to run the application
-CMD ["gunicorn", "-b", "0.0.0.0:5000", "qbdl_gui:app"]
+# Gunicorn configuration
+CMD ["gunicorn", "-b", "0.0.0.0:5000", "--workers=4", "--worker-class=gevent", "qbdl_gui:app"]
