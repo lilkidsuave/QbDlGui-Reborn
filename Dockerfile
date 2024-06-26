@@ -2,7 +2,7 @@
 FROM python:3.12-alpine
 
 # Install gcc and other necessary build tools
-RUN apk add --no-cache gcc musl-dev libffi-dev
+RUN apk add --no-cache gcc musl-dev libffi-dev openssl-dev
 
 EXPOSE 5000
 
@@ -19,5 +19,5 @@ RUN python -m pip install -r requirements.txt
 WORKDIR /app
 COPY . /app
 
-# During debugging, this entry point will be overridden.
-CMD ["python", "qbdl_gui.py"]
+# Use Gunicorn to run the application
+CMD ["gunicorn", "-b", "0.0.0.0:5000", "qbdl_gui:app"]
