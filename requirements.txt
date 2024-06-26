@@ -7,3 +7,4 @@ beautifulsoup4
 colorama
 Flask>=2.3.2
 cryptography
+gunicorn>=20.1.0
