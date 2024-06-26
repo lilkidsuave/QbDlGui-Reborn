@@ -44,7 +44,7 @@ source qbdl/bin/activate
 
 3. Install the dependencies:
 
-### Alpine (exactly like the docker image)
+#### Alpine (exactly like the docker image)
 
 ```
 apk add gcc musl-dev libffi-dev openssl-dev
@@ -52,7 +52,7 @@ apk add gcc musl-dev libffi-dev openssl-dev
 ```
 pip install -r requirements.txt
 ```
-### Debian/Ubuntu
+#### Debian/Ubuntu
 
 ```
 apt-get update && apt-get install -y gcc libc-dev libffi-dev libssl-dev
@@ -61,7 +61,7 @@ apt-get update && apt-get install -y gcc libc-dev libffi-dev libssl-dev
 pip install -r requirements.txt
 ```
 
-### Fedora
+#### Fedora
 
 ```
 dnf install -y gcc glibc-devel libffi-devel openssl-devel
@@ -70,7 +70,7 @@ dnf install -y gcc glibc-devel libffi-devel openssl-devel
 pip install -r requirements.txt
 ```
 
-### Arch
+#### Arch
 
 ```
 pacman -Sy --noconfirm gcc glibc libffi openssl
