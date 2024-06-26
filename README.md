@@ -44,24 +44,59 @@ source qbdl/bin/activate
 
 3. Install the dependencies:
 
+### Alpine (exactly like the docker image)
+
+```
+apk add gcc musl-dev libffi-dev openssl-dev
+```
+```
+pip install -r requirements.txt
+```
+### Debian/Ubuntu
+
+```
+apt-get update && apt-get install -y gcc libc-dev libffi-dev libssl-dev
+```
 ```
 pip install -r requirements.txt
 ```
 
-#### Usage
+### Fedora
 
-##### Command-Line Interface
+```
+dnf install -y gcc glibc-devel libffi-devel openssl-devel
+```
+```
+pip install -r requirements.txt
+```
+
+### Arch
+
+```
+pacman -Sy --noconfirm gcc glibc libffi openssl
+```
+```
+pip install -r requirements.txt
+```
+
+## Usage
+
+### Command-Line Interface
 
 Refer to the existing documentation for command-line usage.
 
-##### Web GUI
+### Web GUI
 
 To use the web GUI, follow these steps:
 
 1. Run the web GUI script:
+
+
 ```
 gunicorn -b 0.0.0.0:5000 --worker-class=gevent --workers=4 qbdl_gui:app
 ```
+
+
 2. Open a web browser and navigate to:
 
 ```
