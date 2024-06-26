@@ -29,10 +29,10 @@ Access the web gui via localhost:5000
 1. Clone the repository and cd into:
 
 ```
-git clone https://github.com/konzepts/qbdl-gui.git
+https://github.com/lilkidsuave/QbDlGui-Reborn.git
 ```
 ```
-cd qbdl-gui
+cd QbDlGui-Reborn
 ```
 
 2. Virtual Environment: Consider using a virtual environment to isolate the dependencies for the project. This can help avoid conflicts between different versions of libraries. You can create a virtual environment using:
