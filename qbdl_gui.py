@@ -83,6 +83,3 @@ def search():
             return jsonify([])  # Return empty list on error
 
     return jsonify([])  # Return empty list if no query or search type provided
-
-if __name__ == '__main__':
-    app.run(debug=True)
