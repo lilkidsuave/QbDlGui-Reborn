@@ -19,8 +19,12 @@ def encrypt_password(password):
 def decrypt_password(encrypted_password):
     return fernet.decrypt(encrypted_password.encode()).decode()
 
+qobuz_dl = None  # Define QobuzDL instance globally
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    global qobuz_dl
+    
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
@@ -30,13 +34,15 @@ def index():
         remember = request.form.get('rememberMe')
 
         try:
-            qobuz = QobuzDL(
-                directory=download_location,
-                quality=quality
-            )
-            qobuz.get_tokens()
-            qobuz.initialize_client(email, password, qobuz.app_id, qobuz.secrets)
-            qobuz.handle_url(url)
+            if not qobuz_dl:
+                qobuz_dl = QobuzDL(
+                    directory=download_location,
+                    quality=quality
+                )
+
+            qobuz_dl.get_tokens()
+            qobuz_dl.initialize_client(email, password, qobuz_dl.app_id, qobuz_dl.secrets)
+            qobuz_dl.handle_url(url)
         except Exception as e:
             logging.error("An error occurred: " + str(e))
             return jsonify(status='error', message='An internal error occurred. Please try again later.'), 500
@@ -57,6 +63,23 @@ def index():
 
     return render_template('index.html', email=email, password=password, download_location=download_location, quality=quality)
 
+@app.route('/search', methods=['GET'])
+def search():
+    global qobuz_dl
+
+    query = request.args.get('query')
+    if query:
+        try:
+            if not qobuz_dl:
+                return jsonify([])  # Return empty if QobuzDL instance is not initialized
+
+            results = qobuz_dl.search_by_type(query, 'album', limit=10)  # Example: searching for albums
+            return jsonify(results)
+        except Exception as e:
+            logging.error("An error occurred during search: " + str(e))
+            return jsonify([])  # Return empty list on error
+
+    return jsonify([])  # Return empty list if no query provided
+
 #if __name__ == '__main__':
-    #from werkzeug.serving import run_simple
-    #run_simple('0.0.0.0', 5000, app)
+    #app.run(debug=True)
