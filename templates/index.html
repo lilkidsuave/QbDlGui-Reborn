@@ -44,15 +44,6 @@
                 <input type="checkbox" class="form-check-input" name="rememberMe" id="rememberMe">
                 <label class="form-check-label" for="rememberMe">Remember me and settings</label>
             </div>
-            <div class="form-group">
-                <label for="searchType">Search Type:</label>
-                <select class="form-control" name="searchType" id="searchType" required>
-                    <option value="album">Album</option>
-                    <option value="artist">Artist</option>
-                    <option value="track">Track</option>
-                    <option value="playlist">Playlist</option>
-                </select>
-            </div>
             <button type="submit" class="btn btn-primary">Download</button>
         </form>
         <div id="progress-container" style="display: none;">
@@ -62,104 +53,48 @@
             </div>
             <p id="status-text">Starting download...</p>
         </div>
-
-        <div id="search-results" style="margin-top: 20px;">
-            <!-- Search results will be displayed here -->
-        </div>
-
+        
         <script>
-            $('#downloadForm').submit(function (e) {
-                e.preventDefault();
-                $('#progress-container').show();
+        $('#downloadForm').submit(function(e) {
+            e.preventDefault();
+            $('#progress-container').show();
+        
+            $.ajax({
+                type: 'POST',
+                url: '/',
+                data: $(this).serialize(),
+                success: function(data) {
+                    if (data.status === 'completed') {
+                        $('#progress-bar').css('width', '100%');
+                        $('#status-text').text('Download Completed!');
 
-                $.ajax({
-                    type: 'POST',
-                    url: '/',
-                    data: $(this).serialize(),
-                    success: function (data) {
-                        if (data.status === 'completed') {
-                            $('#progress-bar').css('width', '100%');
-                            $('#status-text').text('Download Completed!');
-
-                            // Reload the page after 1 second
-                            setTimeout(function () {
-                                location.reload();
-                            }, 1000);
-                        }
-                    },
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        $('#status-text').text('An error occurred: ' + jqXHR.responseJSON.message);
-                    },
-                    xhr: function () {
-                        var xhr = new window.XMLHttpRequest();
-                        xhr.upload.addEventListener("progress", function (evt) {
-                            if (evt.lengthComputable) {
-                                var percentComplete = evt.loaded / evt.total;
-                                percentComplete = parseInt(percentComplete * 100);
-                                $('#progress-bar').css('width', percentComplete + '%');
-                            }
-                        }, false);
-                        return xhr;
+                        // Reload the page after 1 second
+                        setTimeout(function() {
+                            location.reload();
+                        }, 1000);
                     }
-                });
-            });
-
-            // AJAX search function
-            $('#searchType').change(function () {
-                performSearch();
-            });
-
-            $('#url').on('input', function () {
-                performSearch();
-            });
-
-            function performSearch() {
-                var query = $('#url').val();
-                var searchType = $('#searchType').val();
-
-                if (query.length >= 3) {
-                    $.ajax({
-                        url: '/search',
-                        type: 'GET',
-                        data: {
-                            query: query,
-                            searchType: searchType
-                        },
-                        success: function (data) {
-                            displaySearchResults(data);
-                        },
-                        error: function (jqXHR, textStatus, errorThrown) {
-                            console.error('Error performing search:', errorThrown);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    $('#status-text').text('An error occurred: ' + jqXHR.responseJSON.message);
+                },
+                xhr: function() {
+                    var xhr = new window.XMLHttpRequest();
+                    xhr.upload.addEventListener("progress", function(evt) {
+                        if (evt.lengthComputable) {
+                            var percentComplete = evt.loaded / evt.total;
+                            percentComplete = parseInt(percentComplete * 100);
+                            $('#progress-bar').css('width', percentComplete + '%');
                         }
-                    });
-                } else {
-                    $('#search-results').empty();
+                    }, false);
+                    return xhr;
                 }
-            }
-
-            function displaySearchResults(results) {
-                $('#search-results').empty();
-
-                if (results.length > 0) {
-                    var ul = $('<ul class="list-group"></ul>');
-
-                    results.forEach(function (item) {
-                        var li = $('<li class="list-group-item"></li>');
-                        var link = $('<a href="' + item.url + '" target="_blank">' + item.text + '</a>');
-                        li.append(link);
-                        ul.append(li);
-                    });
-
-                    $('#search-results').append(ul);
-                } else {
-                    $('#search-results').append('<p>No results found.</p>');
-                }
-            }
+            });
+        });
         </script>
         <div class="footer">
             <p>QoBuzDlGui-Reborn &copy; Gyarbij and LilKidSuave 2023-2024</p>
         </div>
-    </div>
+    </div>   
 </body>
 
 </html>
