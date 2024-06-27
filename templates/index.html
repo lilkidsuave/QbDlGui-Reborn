@@ -14,6 +14,18 @@
 <body>
     <div class="container mt-5">
         <h2 class="mb-4">QobuzDlGui-Reborn</h2>
+        
+        <form id="searchForm">
+            <div class="form-group">
+                <label for="searchQuery">Search for Music:</label>
+                <input type="text" class="form-control" id="searchQuery" placeholder="Enter search term" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+        
+        <div id="searchResults" class="mt-4"></div>
+
+        <h4 class="mt-5">Download Directly</h4>
         <form action="/" method="post" id="downloadForm">
             <div class="form-group">
                 <label for="email">Your QoBuz Email:</label>
@@ -46,6 +58,7 @@
             </div>
             <button type="submit" class="btn btn-primary">Download</button>
         </form>
+        
         <div id="progress-container" style="display: none;">
             <h4>Downloading...</h4>
             <div class="progress">
@@ -55,43 +68,124 @@
         </div>
         
         <script>
-        $('#downloadForm').submit(function(e) {
-            e.preventDefault();
-            $('#progress-container').show();
-        
-            $.ajax({
-                type: 'POST',
-                url: '/',
-                data: $(this).serialize(),
-                success: function(data) {
-                    if (data.status === 'completed') {
-                        $('#progress-bar').css('width', '100%');
-                        $('#status-text').text('Download Completed!');
-
-                        // Reload the page after 1 second
-                        setTimeout(function() {
-                            location.reload();
-                        }, 1000);
-                    }
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    $('#status-text').text('An error occurred: ' + jqXHR.responseJSON.message);
-                },
-                xhr: function() {
-                    var xhr = new window.XMLHttpRequest();
-                    xhr.upload.addEventListener("progress", function(evt) {
-                        if (evt.lengthComputable) {
-                            var percentComplete = evt.loaded / evt.total;
-                            percentComplete = parseInt(percentComplete * 100);
-                            $('#progress-bar').css('width', percentComplete + '%');
+        $(document).ready(function() {
+            // Search Form Submission
+            $('#searchForm').submit(function(e) {
+                e.preventDefault();
+                let query = $('#searchQuery').val();
+                let searchResultsDiv = $('#searchResults');
+                searchResultsDiv.empty();
+                
+                $.ajax({
+                    type: 'GET',
+                    url: '/search',
+                    data: { query: query },
+                    success: function(data) {
+                        if (data.length > 0) {
+                            let resultsHtml = '<ul class="list-group">';
+                            data.forEach(result => {
+                                resultsHtml += `
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span>${result.text}</span>
+                                        <button class="btn btn-success download-btn" data-url="${result.url}">Download</button>
+                                    </li>`;
+                            });
+                            resultsHtml += '</ul>';
+                            searchResultsDiv.html(resultsHtml);
+                        } else {
+                            searchResultsDiv.html('<p>No results found</p>');
                         }
-                    }, false);
-                    return xhr;
-                }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        searchResultsDiv.html('<p>An error occurred during the search.</p>');
+                    }
+                });
+            });
+
+            // Handle Download Button Clicks
+            $(document).on('click', '.download-btn', function() {
+                let url = $(this).data('url');
+                let email = $('#email').val();
+                let password = $('#password').val();
+                let downloadLocation = $('#download_location').val();
+                let quality = $('#quality').val();
+                
+                $('#progress-container').show();
+                
+                $.ajax({
+                    type: 'POST',
+                    url: '/download',
+                    data: {
+                        url: url,
+                        email: email,
+                        password: password,
+                        download_location: downloadLocation,
+                        quality: quality
+                    },
+                    success: function(data) {
+                        if (data.status === 'completed') {
+                            $('#progress-bar').css('width', '100%');
+                            $('#status-text').text('Download Completed!');
+                            setTimeout(function() {
+                                location.reload();
+                            }, 1000);
+                        }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        $('#status-text').text('An error occurred: ' + jqXHR.responseJSON.message);
+                    },
+                    xhr: function() {
+                        var xhr = new window.XMLHttpRequest();
+                        xhr.upload.addEventListener("progress", function(evt) {
+                            if (evt.lengthComputable) {
+                                var percentComplete = evt.loaded / evt.total;
+                                percentComplete = parseInt(percentComplete * 100);
+                                $('#progress-bar').css('width', percentComplete + '%');
+                            }
+                        }, false);
+                        return xhr;
+                    }
+                });
+            });
+
+            // Download Form Submission
+            $('#downloadForm').submit(function(e) {
+                e.preventDefault();
+                $('#progress-container').show();
+                
+                $.ajax({
+                    type: 'POST',
+                    url: '/',
+                    data: $(this).serialize(),
+                    success: function(data) {
+                        if (data.status === 'completed') {
+                            $('#progress-bar').css('width', '100%');
+                            $('#status-text').text('Download Completed!');
+                            setTimeout(function() {
+                                location.reload();
+                            }, 1000);
+                        }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        $('#status-text').text('An error occurred: ' + jqXHR.responseJSON.message);
+                    },
+                    xhr: function() {
+                        var xhr = new window.XMLHttpRequest();
+                        xhr.upload.addEventListener("progress", function(evt) {
+                            if (evt.lengthComputable) {
+                                var percentComplete = evt.loaded / evt.total;
+                                percentComplete = parseInt(percentComplete * 100);
+                                $('#progress-bar').css('width', percentComplete + '%');
+                            }
+                        }, false);
+                        return xhr;
+                    }
+                });
             });
         });
         </script>
-        <div class="footer">
+        
+        <div class="footer mt-5">
             <p>QoBuzDlGui-Reborn &copy; Gyarbij and LilKidSuave 2023-2024</p>
         </div>
     </div>   
