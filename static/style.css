@@ -8,8 +8,7 @@ body {
 }
 
 .container {
-    width: 90%;
-    max-width: 600px;
+    width: 100%;
     margin: 0 auto;
     background-color: #36393f;
     padding: 30px;
@@ -85,12 +84,26 @@ input[type="submit"]:hover {
 }
 
 /* Media Queries for Responsiveness */
-@media (max-width: 768px) {
+@media (min-width: 576px) {
     .container {
-        padding: 20px;
+        width: 90%;
     }
+}
 
-    h2 {
-        font-size: 1.5em;
+@media (min-width: 768px) {
+    .container {
+        width: 80%;
+    }
+}
+
+@media (min-width: 992px) {
+    .container {
+        width: 70%;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container {
+        width: 60%;
     }
 }
