@@ -8,6 +8,7 @@ body {
 }
 
 .container {
+    width: 90%;
     max-width: 600px;
     margin: 0 auto;
     background-color: #36393f;
@@ -38,9 +39,13 @@ input[type="email"],
 input[type="password"],
 input[type="number"],
 select.form-control {
+    width: 100%;
+    padding: 10px;
     box-shadow: 0 0 10px rgba(0, 123, 255, 0.25);
     background-color: #2c2f33;
     color: #f4f4f4;
+    border: 1px solid #555;
+    border-radius: 4px;
 }
 
 input[type="submit"] {
@@ -77,4 +82,15 @@ input[type="submit"]:hover {
 .status {
     margin-bottom: 20px;
     font-style: italic;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
 }
