@@ -77,13 +77,17 @@
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     $('#status-text').text('An error occurred: ' + jqXHR.responseJSON.message);
+                    $('#progress-bar').css('background', '#FF0000');
+                    setTimeout(function() {
+                            location.reload();
+                        }, 2000);
                 },
                 xhr: function() {
                     var xhr = new window.XMLHttpRequest();
                     xhr.upload.addEventListener("progress", function(evt) {
                         if (evt.lengthComputable) {
                             var percentComplete = evt.loaded / evt.total;
-                            percentComplete = parseInt(percentComplete * 100);
+                            percentComplete = parseInt(percentComplete);
                             $('#progress-bar').css('width', percentComplete + '%');
                         }
                     }, false);
