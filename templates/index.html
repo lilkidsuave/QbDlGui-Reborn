@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QoBuzDL-Reborn</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
@@ -54,16 +53,44 @@
             </div>
             <p id="status-text">Starting download...</p>
         </div>
-
+        
         <script>
-            var socket = io();
-            socket.on('progress_update', function(data) {
-                let progress = (data.downloaded / data.total) * 100;
-                $('#progress-bar').css('width', progress + '%');
-                $('#status-text').text(`Downloaded ${data.downloaded} of ${data.total} files`);
-            });
-        </script>
+        $('#downloadForm').submit(function(e) {
+            e.preventDefault();
+            $('#progress-container').show();
+        
+            $.ajax({
+                type: 'POST',
+                url: '/',
+                data: $(this).serialize(),
+                success: function(data) {
+                    if (data.status === 'completed') {
+                        $('#progress-bar').css('width', '100%');
+                        $('#status-text').text('Download Completed!');
 
+                        // Reload the page after 1 second
+                        setTimeout(function() {
+                            location.reload();
+                        }, 2000);
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    $('#status-text').text('An error occurred: ' + jqXHR.responseJSON.message);
+                },
+                xhr: function() {
+                    var xhr = new window.XMLHttpRequest();
+                    xhr.upload.addEventListener("progress", function(evt) {
+                        if (evt.lengthComputable) {
+                            var percentComplete = evt.loaded / evt.total;
+                            percentComplete = parseInt(percentComplete * 100);
+                            $('#progress-bar').css('width', percentComplete + '%');
+                        }
+                    }, false);
+                    return xhr;
+                }
+            });
+        });
+        </script>
         <div class="footer">
             <p>QoBuzDlGui-Reborn &copy; Gyarbij and LilKidSuave 2023-2024</p>
         </div>
