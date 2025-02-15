@@ -87,7 +87,7 @@
                     xhr.upload.addEventListener("progress", function(evt) {
                         if (evt.lengthComputable) {
                             var percentComplete = evt.loaded / evt.total;
-                            percentComplete = parseInt(percentComplete);
+                            percentComplete = parseInt(percentComplete) * 10;
                             $('#progress-bar').css('width', percentComplete + '%');
                         }
                     }, false);
